@@ -1,0 +1,64 @@
+
+#map {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    min-height: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#map svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Shared color variables */
+#map svg circle,
+.legend > div {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+}
+
+/* Station circles */
+#map svg circle {
+    pointer-events: auto;
+    cursor: pointer;
+    fill: var(--color);
+}
+
+/* Legend container */
+.legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    margin-block: 1em;
+}
+
+/* Individual legend items */
+.legend > div {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+/* Circular color swatches */
+.legend > div::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: var(--color);
+}
